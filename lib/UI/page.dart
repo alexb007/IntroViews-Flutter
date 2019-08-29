@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intro_views_flutter/Clipper/oval_top_border_clipper.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 
 /// This is the class which contains the Page UI.
@@ -22,7 +23,6 @@ class Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Container(
-      padding: const EdgeInsets.all(8.0),
       width: double.infinity,
       color: pageViewModel.pageColor,
       child: new Opacity(
@@ -40,31 +40,40 @@ class Page extends StatelessWidget {
 
   /// when device is Portrait place title, image and body in a column
   Widget _buildPortraitPage() {
-    return new Column(
-      mainAxisAlignment: columnMainAxisAlignment,
-      mainAxisSize: MainAxisSize.max,
+    return new Stack(
       children: <Widget>[
-        Flexible(
-          flex: 1,
-          child: new _TitlePageTransform(
+        FittedBox(
+          child: _ImagePageTransform(
             percentVisible: percentVisible,
             pageViewModel: pageViewModel,
           ),
-        ), //Transform
-        Expanded(
-          flex: 4,
-          child: new _ImagePageTransform(
-            percentVisible: percentVisible,
-            pageViewModel: pageViewModel,
+          fit: BoxFit.fill,
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: ClipPath(
+            clipper: OvalTopBorderClipper(),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white
+              ),
+              padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
+              height: 400,
+              child: Column(
+                children: <Widget>[
+                  _TitlePageTransform(
+                    percentVisible: percentVisible,
+                    pageViewModel: pageViewModel,
+                  ),
+                  _BodyPageTransform(
+                    percentVisible: percentVisible,
+                    pageViewModel: pageViewModel,
+                  ),
+                ],
+              ),
+            ),
           ),
-        ), //Transform
-        Flexible(
-          flex: 2,
-          child: new _BodyPageTransform(
-            percentVisible: percentVisible,
-            pageViewModel: pageViewModel,
-          ),
-        ), //Transform
+        )
       ],
     );
   }

@@ -251,15 +251,7 @@ class _IntroViewsFlutterState extends State<IntroViewsFlutter>
                 columnMainAxisAlignment: widget.columnMainAxisAlignment),
           ), //PageReveal
 
-          PagerIndicator(
-            //bottom page indicator
-            viewModel: PagerIndicatorViewModel(
-              pages,
-              activePageIndex,
-              slideDirection,
-              slidePercent,
-            ),
-          ), //PagerIndicator
+
 
           PageIndicatorButtons(
             //Skip and Done Buttons
@@ -322,7 +314,20 @@ class _IntroViewsFlutterState extends State<IntroViewsFlutter>
             canDragLeftToRight: activePageIndex > 0,
             canDragRightToLeft: activePageIndex < pages.length - 1,
             slideUpdateStream: this.slideUpdateStream,
-          ), //PageDragger
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child:  PagerIndicator(
+              //bottom page indicator
+              viewModel: PagerIndicatorViewModel(
+                pages,
+                activePageIndex,
+                slideDirection,
+                slidePercent,
+              ),
+            ),
+          )
+
         ], //Widget
       ), //Stack
     ); //Scaffold

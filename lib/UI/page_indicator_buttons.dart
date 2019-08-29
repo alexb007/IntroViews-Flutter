@@ -35,6 +35,7 @@ class DefaultButton extends StatelessWidget {
     }
 
     return FlatButton(
+      color: Colors.blueAccent,
       onPressed: onTap,
       child: Opacity(
         opacity: opacity,
@@ -77,6 +78,7 @@ class DoneButton extends StatelessWidget {
 
     return FlatButton(
       onPressed: onTap,
+      color: Colors.blueAccent,
       child: Opacity(
         opacity: opacity,
         child: DefaultTextStyle.merge(
@@ -209,20 +211,13 @@ class PageIndicatorButtons extends StatelessWidget {
       bottom: 0.0,
       child: DefaultTextStyle(
         style: textStyle,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisSize: MainAxisSize.max,
-          children: <Widget>[
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: _getSkipORBackButton() //Row
-                ), //Padding
-            Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: _getDoneORNextButton() //Row
-                )
-          ],
+        child: Container(
+          height: 64,
+          child: Padding(
+            padding:
+                const EdgeInsets.only(bottom: 10.0, left: 10.0, right: 10.0),
+            child: _getDoneORNextButton(),
+          ),
         ),
       ),
     );

@@ -12,15 +12,14 @@ class App extends StatelessWidget {
   final pages = [
     PageViewModel(
         pageColor: const Color(0xFF03A9F4),
-        // iconImageAssetPath: 'assets/air-hostess.png',
-        bubble: Image.asset('assets/air-hostess.png'),
         body: Text(
           'Haselfree  booking  of  flight  tickets  with  full  refund  on  cancelation',
         ),
         title: Text(
           'Flights',
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        textStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
+        textStyle: TextStyle(color: Colors.black, fontSize: 24),
         mainImage: Image.asset(
           'assets/airplane.png',
           height: 285.0,
@@ -29,10 +28,11 @@ class App extends StatelessWidget {
         )),
     PageViewModel(
       pageColor: const Color(0xFF8BC34A),
-      iconImageAssetPath: 'assets/waiter.png',
       body: Text(
         'We  work  for  the  comfort ,  enjoy  your  stay  at  our  beautiful  hotels',
+        style: TextStyle(fontSize: 24),
       ),
+      textStyle: TextStyle(color: Colors.black),
       title: Text('Hotels'),
       mainImage: Image.asset(
         'assets/hotel.png',
@@ -40,14 +40,13 @@ class App extends StatelessWidget {
         width: 285.0,
         alignment: Alignment.center,
       ),
-      textStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
     ),
     PageViewModel(
       pageColor: const Color(0xFF607D8B),
-      iconImageAssetPath: 'assets/taxi-driver.png',
       body: Text(
         'Easy  cab  booking  at  your  doorstep  with  cashless  payment  system',
       ),
+      textStyle: TextStyle(color: Colors.black),
       title: Text('Cabs'),
       mainImage: Image.asset(
         'assets/taxi.png',
@@ -55,7 +54,6 @@ class App extends StatelessWidget {
         width: 285.0,
         alignment: Alignment.center,
       ),
-      textStyle: TextStyle(fontFamily: 'MyFont', color: Colors.white),
     ),
   ];
 
@@ -70,6 +68,7 @@ class App extends StatelessWidget {
       home: Builder(
         builder: (context) => IntroViewsFlutter(
           pages,
+          showNextButton: true,
           onTapDoneButton: () {
             Navigator.push(
               context,

@@ -16,6 +16,6 @@ class PageBubbleViewModel {
     this.iconColor,
     this.isHollow,
     this.activePercent,
-    this.bubbleBackgroundColor = const Color(0x88FFFFFF),
+    this.bubbleBackgroundColor = const Color(0x88D8D8D8),
   }) : assert(bubbleBackgroundColor != null);
 }

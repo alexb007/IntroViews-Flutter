@@ -34,7 +34,7 @@ class DefaultButton extends StatelessWidget {
       opacity = pageButtonViewModel.slidePercent;
     }
 
-    return FlatButton(
+    return MaterialButton(
       color: Colors.blueAccent,
       onPressed: onTap,
       child: Opacity(
@@ -76,7 +76,7 @@ class DoneButton extends StatelessWidget {
       opacity = 1.0 - pageButtonViewModel.slidePercent;
     }
 
-    return FlatButton(
+    return MaterialButton(
       onPressed: onTap,
       color: Colors.blueAccent,
       child: Opacity(

@@ -27,6 +27,9 @@ class IntroViewsFlutter extends StatefulWidget {
   /// gets overiden by [pageButtonTextStyles]
   final Color pageButtonsColor;
 
+  /// set the active indicator color
+  final Color activeIndicatorColor;
+
   /// Whether you want to show the skip button or not.
   final bool showSkipButton;
 
@@ -35,6 +38,9 @@ class IntroViewsFlutter extends StatefulWidget {
 
   /// Whether you want to show the back button or not.
   final bool showBackButton;
+
+  /// Whether indicators transition enabled or disabled.
+  final bool indicatorsTransitionEnabled;
 
   /// TextStyles for done, skip Buttons
   ///
@@ -103,11 +109,13 @@ class IntroViewsFlutter extends StatefulWidget {
     this.onTapBackButton,
     this.showNextButton = false,
     this.showBackButton = false,
+    this.indicatorsTransitionEnabled = false,
     this.pageButtonTextSize = 18.0,
     this.pageButtonFontFamily,
     this.onTapSkipButton,
     this.onTapNextButton,
     this.pageButtonsColor,
+    this.activeIndicatorColor = const Color(0xFF177CC4),
     this.doneText = const Text("DONE"),
     this.nextText = const Text("NEXT"),
     this.skipText = const Text("SKIP"),
@@ -251,8 +259,6 @@ class _IntroViewsFlutterState extends State<IntroViewsFlutter>
                 columnMainAxisAlignment: widget.columnMainAxisAlignment),
           ), //PageReveal
 
-
-
           PageIndicatorButtons(
             //Skip and Done Buttons
             textStyle: textStyle,
@@ -317,17 +323,18 @@ class _IntroViewsFlutterState extends State<IntroViewsFlutter>
           ),
           Align(
             alignment: Alignment.bottomCenter,
-            child:  PagerIndicator(
+            child: PagerIndicator(
               //bottom page indicator
               viewModel: PagerIndicatorViewModel(
                 pages,
                 activePageIndex,
                 slideDirection,
                 slidePercent,
+                widget.indicatorsTransitionEnabled,
+                widget.activeIndicatorColor,
               ),
             ),
           )
-
         ], //Widget
       ), //Stack
     ); //Scaffold

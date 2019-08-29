@@ -42,21 +42,24 @@ class Page extends StatelessWidget {
   Widget _buildPortraitPage() {
     return new Stack(
       children: <Widget>[
-        FittedBox(
-          child: _ImagePageTransform(
-            percentVisible: percentVisible,
-            pageViewModel: pageViewModel,
+        Transform(
+          transform: new Matrix4.translationValues(0.0, 0 * (1 - percentVisible), 0.0),
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: pageViewModel.mainImage,
+                  fit: BoxFit.cover
+              ),
+            ),
           ),
-          fit: BoxFit.fill,
         ),
+
         Align(
           alignment: Alignment.bottomCenter,
           child: ClipPath(
             clipper: OvalTopBorderClipper(),
             child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white
-              ),
+              decoration: BoxDecoration(color: Colors.white),
               padding: EdgeInsets.symmetric(vertical: 40, horizontal: 10),
               height: 400,
               child: Column(
@@ -161,19 +164,18 @@ class _ImagePageTransform extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return new Transform(
-      //Used for vertical transformation
-      transform:
-          new Matrix4.translationValues(0.0, 50.0 * (1 - percentVisible), 0.0),
-      child: new Padding(
-        padding: new EdgeInsets.only(
-          top: 20.0,
-          bottom: 40.0,
-        ),
-        child: new Container(
-          child: pageViewModel.mainImage, //Loading main
-        ), //Container
-      ), //Padding
-    );
+        //Used for vertical transformation
+        transform:
+            new Matrix4.translationValues(0.0, 0 * (1 - percentVisible), 0.0),
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: new Container(
+            decoration: BoxDecoration(color: Colors.red),
+            child: FittedBox(
+              fit: BoxFit.fill,
+            ), //Loading main
+          ),
+        ));
   }
 }
 

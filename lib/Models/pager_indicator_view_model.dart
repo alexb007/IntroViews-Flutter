@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:intro_views_flutter/Constants/constants.dart';
 import 'package:intro_views_flutter/Models/page_view_model.dart';
 
@@ -8,11 +10,9 @@ class PagerIndicatorViewModel {
   final int activeIndex;
   final SlideDirection slideDirection;
   final double slidePercent;
+  final transitionEnabled;
+  final Color activeIndicatorColor;
 
-  PagerIndicatorViewModel(
-    this.pages,
-    this.activeIndex,
-    this.slideDirection,
-    this.slidePercent,
-  );
+  PagerIndicatorViewModel(this.pages, this.activeIndex, this.slideDirection,
+      this.slidePercent, this.transitionEnabled, this.activeIndicatorColor);
 }

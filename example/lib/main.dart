@@ -20,11 +20,8 @@ class App extends StatelessWidget {
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         textStyle: TextStyle(color: Colors.black, fontSize: 24),
-        mainImage: Image.asset(
-          'assets/airplane.png',
-          height: 285.0,
-          width: 285.0,
-          alignment: Alignment.center,
+        mainImage: AssetImage(
+          'assets/welcome1.png',
         )),
     PageViewModel(
       pageColor: const Color(0xFF8BC34A),
@@ -34,11 +31,8 @@ class App extends StatelessWidget {
       ),
       textStyle: TextStyle(color: Colors.black),
       title: Text('Hotels'),
-      mainImage: Image.asset(
+      mainImage: AssetImage(
         'assets/hotel.png',
-        height: 285.0,
-        width: 285.0,
-        alignment: Alignment.center,
       ),
     ),
     PageViewModel(
@@ -48,11 +42,8 @@ class App extends StatelessWidget {
       ),
       textStyle: TextStyle(color: Colors.black),
       title: Text('Cabs'),
-      mainImage: Image.asset(
+      mainImage: AssetImage(
         'assets/taxi.png',
-        height: 285.0,
-        width: 285.0,
-        alignment: Alignment.center,
       ),
     ),
   ];

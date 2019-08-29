@@ -37,7 +37,7 @@ class PageViewModel {
   /// Image Widget
   ///
   /// _typicaly a Image Widget_
-  final Widget mainImage;
+  final AssetImage mainImage;
 
   /// bubble inner Widget
   ///
@@ -49,7 +49,7 @@ class PageViewModel {
   PageViewModel(
       {this.pageColor,
       this.iconImageAssetPath,
-      this.bubbleBackgroundColor = const Color(0x88FFFFFF),
+      this.bubbleBackgroundColor = const Color(0xFFD8D8D8),
       this.iconColor,
       @required this.title,
       @required this.body,

@@ -15,6 +15,33 @@ class PagerIndicator extends StatelessWidget {
     this.viewModel,
   });
 
+  List<Widget> _getBubbles(bubbles) {
+    if (this.viewModel.transitionEnabled) {
+      //Calculating the translation value of pager indicator while sliding.
+      final baseTranslation =
+          ((viewModel.pages.length * BUBBLE_WIDTH) / 2) - (BUBBLE_WIDTH / 2);
+      var translation =
+          baseTranslation - (viewModel.activeIndex * BUBBLE_WIDTH);
+
+      if (viewModel.slideDirection == SlideDirection.leftToRight) {
+        translation += BUBBLE_WIDTH * viewModel.slidePercent;
+      } else if (viewModel.slideDirection == SlideDirection.rightToLeft) {
+        translation -= BUBBLE_WIDTH * viewModel.slidePercent;
+      }
+      return [
+        Transform(
+          // used for horizontal transformation
+          transform: Matrix4.translationValues(translation, 0.0, 0.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: bubbles,
+          ), //Row
+        )
+      ];
+    }
+    return bubbles;
+  }
+
   @override
   Widget build(BuildContext context) {
     //Extracting page bubble information from page view model
@@ -37,34 +64,20 @@ class PagerIndicator extends StatelessWidget {
         percentActive = 0.0;
       }
 
-      //Checking is that bubble hollow
-      bool isHollow = i > viewModel.activeIndex ||
-          (i == viewModel.activeIndex &&
-              viewModel.slideDirection == SlideDirection.leftToRight);
-
       //Adding to the list
       bubbles.add(PageBubble(
         viewModel: PageBubbleViewModel(
           iconAssetPath: page.iconImageAssetPath,
           iconColor: page.iconColor,
-          isHollow: isHollow,
+          isActive: (i == viewModel.activeIndex),
           activePercent: percentActive,
           bubbleBackgroundColor: page.bubbleBackgroundColor,
           bubbleInner: page.bubble,
+          activeBubbleColor: viewModel.activeIndicatorColor,
         ),
       ));
     }
 
-    //Calculating the translation value of pager indicator while sliding.
-    final baseTranslation =
-        ((viewModel.pages.length * BUBBLE_WIDTH) / 2) - (BUBBLE_WIDTH / 2);
-    var translation = baseTranslation - (viewModel.activeIndex * BUBBLE_WIDTH);
-
-    if (viewModel.slideDirection == SlideDirection.leftToRight) {
-      translation += BUBBLE_WIDTH * viewModel.slidePercent;
-    } else if (viewModel.slideDirection == SlideDirection.rightToLeft) {
-      translation -= BUBBLE_WIDTH * viewModel.slidePercent;
-    }
     //UI
     return Container(
       margin: EdgeInsets.only(bottom: 80),
@@ -72,18 +85,8 @@ class PagerIndicator extends StatelessWidget {
         children: <Widget>[
           Expanded(child: Container()),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Transform(
-                // used for horizontal transformation
-                transform: Matrix4.translationValues(translation, 0.0, 0.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: bubbles,
-                ), //Row
-              ),
-            ],
-          ), //Transform
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: _getBubbles(bubbles)), //Transform
         ], //Children
       ),
     );
